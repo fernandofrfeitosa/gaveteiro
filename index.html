@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo de Corte</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header >
+        <H1>Lista de Cortes </H1>
+       
+       
+    </header>
+    <main>
+        <form id="formCorte">
+            <div class="input-column">
+                <label for="largura">Largura:</label>
+                <input type="number" id="largura" name="largura" step="0.01" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="altura">Altura:</label>
+                <input type="number" id="altura" name="altura" step="0.01" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="profundidade">Profundidade:</label>
+                <input type="number" id="profundidade" name="profundidade" step="0.01" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="espessura">Espessura do material:</label>
+                <input type="number" id="espessura" name="espessura" step="0.01" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="numGavetas">Número de gavetas:</label>
+                <input type="number" id="numGavetas" name="numGavetas" step="1" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="materialPrincipal">Material principal:</label>
+                <input type="text" id="materialPrincipal" name="materialPrincipal" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="frenteColorida">Frente colorida:</label>
+                <input type="text" id="frenteColorida" name="frenteColorida" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="folgaEntreGavetas">Folga entre gavetas:</label>
+                <input type="number" id="folgaEntreGavetas" name="folgaEntreGavetas" step="0.01" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="largTrava">Largura/Trava:</label>
+                <input type="number" id="largTrava" name="largTrava" step="0.01" required><br><br>
+            </div>
+        
+            <div class="input-column">
+                <label for="espessuraCorredica">Espessura cada corrediça:</label>
+                <input type="number" id="espessuraCorredica" name="espessuraCorredica" step="0.01" required><br><br>
+            </div>
+            
+            <div class="button-row">
+                <button type="submit">Calcular Lista de Corte</button>
+            </div>
+        </form>
+        
+        
+        
+        
+        
+
+        <div id="resultado"></div>
+    </main>
+    <footer>
+        <p>Desenvolvido por Fernando Feitosa</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+    <button onclick="redirectToVisualizador()">Visualizador de Chapa</button>
+</body>
+</html>

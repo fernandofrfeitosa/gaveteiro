@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificar se retângulos cabem</title>
+<style>
+    #canvas {
+        width: 400px;
+        height: 400px;
+        border: 1px solid black;
+        position: relative;
+    }
+    #retangulo-externo {
+        width: 200px;
+        height: 200px;
+        border: 1px solid blue;
+        position: relative;
+    }
+    .retangulo-interno {
+        border: 1px solid red;
+        position: absolute;
+    }
+</style>
+</head>
+<body>
+<h2>Verificar se retângulos cabem dentro do retângulo externo</h2>
+<div id="canvas">
+    <div id="retangulo-externo"></div>
+</div>
+
+<script>
+function cabeNaoCabe(retangulosInternos) {
+    const retanguloExterno = { largura: 200, altura: 200 };
+    const retanguloExternoDiv = document.getElementById('retangulo-externo');
+    const retangulosInseridos = [];
+    
+    // Ordenar os retângulos internos por área (maior para menor)
+    retangulosInternos.sort((a, b) => b.largura * b.altura - a.largura * a.altura);
+    
+    for (let i = 0; i < retangulosInternos.length; i++) {
+        const retanguloInterno = retangulosInternos[i];
+        
+        // Verificar se o retângulo interno pode ser inserido sem colisão
+        let encaixado = false;
+        for (let y = 0; y <= retanguloExterno.altura - retanguloInterno.altura && !encaixado; y++) {
+            for (let x = 0; x <= retanguloExterno.largura - retanguloInterno.largura && !encaixado; x++) {
+                const novoRetangulo = { x, y, largura: retanguloInterno.largura, altura: retanguloInterno.altura };
+                if (verificarColisao(retangulosInseridos, novoRetangulo)) {
+                    continue;
+                }
+                
+                const divInterna = document.createElement('div');
+                divInterna.className = 'retangulo-interno';
+                divInterna.style.width = retanguloInterno.largura + 'px';
+                divInterna.style.height = retanguloInterno.altura + 'px';
+                divInterna.style.left = x + 'px';
+                divInterna.style.top = y + 'px';
+                retanguloExternoDiv.appendChild(divInterna);
+                retangulosInseridos.push(novoRetangulo);
+                encaixado = true;
+            }
+        }
+        
+        if (!encaixado) {
+            console.log("Retângulo interno " + (i+1) + " não coube dentro do retângulo externo.");
+        }
+    }
+}
+
+function verificarColisao(retangulosInseridos, novoRetangulo) {
+    for (let i = 0; i < retangulosInseridos.length; i++) {
+        const retangulo = retangulosInseridos[i];
+        if (novoRetangulo.x < retangulo.x + retangulo.largura &&
+            novoRetangulo.x + novoRetangulo.largura > retangulo.x &&
+            novoRetangulo.y < retangulo.y + retangulo.altura &&
+            novoRetangulo.y + novoRetangulo.altura > retangulo.y) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const retangulosInternos = [
+    { largura: 100, altura: 100 },
+    { largura: 150, altura: 150 },
+    { largura: 250, altura: 50 },
+    { largura: 50, altura: 250 }
+];
+
+cabeNaoCabe(retangulosInternos);
+</script>
+</body>
+</html>
+
+
+
